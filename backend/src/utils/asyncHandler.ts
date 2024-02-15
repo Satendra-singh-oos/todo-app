@@ -7,7 +7,7 @@ type RequestHandler = (
 ) => Promise<void>;
 
 const asyncHandler = (handler: RequestHandler) => {
-  async (req: Request, res: Response, next: NextFunction) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
     try {
       await handler(req, res, next);
     } catch (error) {

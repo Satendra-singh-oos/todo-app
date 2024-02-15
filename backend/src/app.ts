@@ -16,9 +16,10 @@ app.use(express.json({ limit: "20kb" }));
 app.use(cookieParser());
 
 // imported routes
+import userRoute from "./routes/user.routes";
 
 // routes declartion
 
-// app.use("/api/v1/healthCheck")
+app.use("/api/v1/users", userRoute);
 
 export { app };

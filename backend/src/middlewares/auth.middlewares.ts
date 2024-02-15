@@ -17,6 +17,7 @@ export const verifyJwt = asyncHandler(
       )) as JwtPayload;
 
       const userId = verifyedToken?.id;
+
       const findUser = await prisma.user.findFirst({
         where: {
           id: userId,
@@ -28,6 +29,7 @@ export const verifyJwt = asyncHandler(
       }
 
       const user = {
+        id: findUser.id,
         name: findUser.name,
         email: findUser.email,
         role: findUser.role,

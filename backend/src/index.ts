@@ -20,5 +20,5 @@ connectDb()
     });
   })
   .catch((err) => {
-    console.log("MongoDb Faild To Connectoin", err);
+    console.log("Server/Prisma Faild To Connectoin", err);
   });

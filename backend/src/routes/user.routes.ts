@@ -6,6 +6,7 @@ import {
   changeCurrentPassword,
   getCurrentUser,
   updateUserAccountDetails,
+  logoutUser,
 } from "../controllers/user.controllers";
 import { verifyJwt } from "../middlewares/auth.middlewares";
 
@@ -15,6 +16,7 @@ router.route("/register").post(registerUser);
 router.route("/login").post(loginUser);
 router.route("/refresh-token").post(refreshAccesToken);
 
+router.route("/logout").post(verifyJwt, logoutUser);
 router.route("/change-password").post(verifyJwt, changeCurrentPassword);
 router.route("/getCurrentUser").get(verifyJwt, getCurrentUser);
 router.route("/update-account").patch(verifyJwt, updateUserAccountDetails);

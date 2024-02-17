@@ -150,6 +150,14 @@ const todoSlice = createSlice({
       state.loading = false;
       state.completed = !state.completed;
     });
+
+    builder.addCase(deleteTodo.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(deleteTodo.fulfilled, (state) => {
+      state.loading = false;
+    });
   },
 });
 

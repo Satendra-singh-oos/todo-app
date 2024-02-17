@@ -1,4 +1,3 @@
-import { BASE_URL } from "../../constants";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../helpers/axiosInstance";
 
@@ -152,7 +151,7 @@ const authSlice = createSlice({
       state.userData = action.payload;
     });
 
-    builder.addCase(getCurrentUser.rejected, (state, action) => {
+    builder.addCase(getCurrentUser.rejected, (state) => {
       state.loading = false;
       state.status = true;
       state.userData = null;

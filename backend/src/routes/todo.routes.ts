@@ -6,6 +6,7 @@ import {
   deleteTodo,
   getAllTodo,
   getTodoById,
+  toggleTodo,
   updateTodo,
 } from "../controllers/todo.controllers";
 
@@ -13,6 +14,8 @@ const router = Router();
 
 router.route("/addTodo").post(verifyJwt, addTodo);
 router.route("/updateTodo").patch(verifyJwt, updateTodo);
+
+router.route("/toggleTodo").patch(verifyJwt, toggleTodo);
 
 router.route("/getAllTodo").get(verifyJwt, getAllTodo);
 router.route("/getTodoById").get(verifyJwt, getTodoById);

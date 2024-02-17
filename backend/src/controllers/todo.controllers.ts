@@ -113,7 +113,7 @@ const deleteTodo = asyncHandler(async (req: Request | any, res: Response) => {
     },
   });
 
-  res.status(200).json(new ApiResponse(200, "", "Successfuly delted the todo"));
+  res.status(200).json(new ApiResponse(200, {}, "Successfuly delted the todo"));
 });
 
 const getAllTodo = asyncHandler(async (req: Request | any, res: Response) => {
@@ -157,4 +157,40 @@ const getTodoById = asyncHandler(async (req: Request | any, res: Response) => {
     .json(new ApiResponse(200, findTodo, "Fetched the todo succesfuly"));
 });
 
-export { addTodo, updateTodo, deleteTodo, getAllTodo, getTodoById };
+const toggleTodo = asyncHandler(async (req: Request | any, res: Response) => {
+  const userId = req.user?.id;
+  const { id } = req.query;
+  if (!id) {
+    throw new ApiError(404, "Id of todo required");
+  }
+
+  const todoId = Number(id);
+
+  const findTodo = await prisma.todo.findFirst({
+    where: {
+      id: todoId,
+    },
+  });
+
+  if (userId !== findTodo?.ownerId) {
+    throw new ApiError(
+      404,
+      "You Are not authorized to Get this todo as you are not the owner"
+    );
+  }
+
+  const updateTodo = await prisma.todo.update({
+    where: {
+      id: todoId,
+    },
+    data: {
+      completed: !findTodo?.completed,
+    },
+  });
+
+  res
+    .status(200)
+    .json(new ApiResponse(200, updateTodo, "Toggled the todo succesfuly"));
+});
+
+export { addTodo, updateTodo, deleteTodo, getAllTodo, getTodoById, toggleTodo };

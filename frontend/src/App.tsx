@@ -1,11 +1,13 @@
-import HomePage from "./pages/HomePage";
+// import Login from "./components/Login";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
     <>
       <div>
-        <h1 className="bg-pink-600">Hello World</h1>
-        <HomePage />
+        <main>
+          <Outlet />
+        </main>
       </div>
     </>
   );

@@ -4,6 +4,7 @@ import { getAllTodo } from "../features/todo/todoSlice";
 
 const HomePage = () => {
   const [todos, setTodos] = useState([]);
+
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchData = async () => {
@@ -12,6 +13,7 @@ const HomePage = () => {
 
         if (response) {
           setTodos(response.payload);
+          console.log(response.payload);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -26,9 +28,12 @@ const HomePage = () => {
         {todos.length > 0 ? (
           <div>
             {todos.map((todo) => (
-              <div key={todo.id}>
-                <h1>{todo.title}</h1>
+              <div key={todo.id} className="flex  justify-center gap-24">
+                <div>
+                  <h1>{todo.title}</h1>
+                </div>
                 <h2>{todo.description}</h2>
+                <h3>{todo.completed ? "Completed" : "Not Completed"}</h3>
               </div>
             ))}
           </div>

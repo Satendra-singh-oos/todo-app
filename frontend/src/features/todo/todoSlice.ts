@@ -54,7 +54,9 @@ export const getTodoById = createAsyncThunk(
   "getTodoById",
   async (todoId: any) => {
     try {
-      const response = await axiosInstance.get(`/getTodoById?id=${todoId}`);
+      const response = await axiosInstance.get(
+        `/todos/getTodoById?id=${todoId}`
+      );
       alert("Fetch Your Todo by Id");
       return response.data;
     } catch (error: any) {
@@ -66,7 +68,7 @@ export const getTodoById = createAsyncThunk(
 
 export const getAllTodo = createAsyncThunk("getAllTodo", async () => {
   try {
-    const response = await axiosInstance.get("/getAllTodo");
+    const response = await axiosInstance.get("/todos/getAllTodo");
     return response.data.data;
   } catch (error: any) {
     alert(error?.response?.data?.error);

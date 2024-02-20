@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getCurrentUser, userLogin } from "../features/auth/authSlice";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -18,7 +19,6 @@ const Login = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(loginData);
 
     // api call here
 
@@ -30,6 +30,7 @@ const Login = () => {
         navigate("/home");
       } else {
         alert("Wrong Credientel");
+        navigate("/login");
       }
     } catch (error: any) {
       setError(error.message);

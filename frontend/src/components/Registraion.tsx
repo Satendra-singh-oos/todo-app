@@ -28,6 +28,8 @@ const Registraion = () => {
       if (formData) {
         const response = await dispatch(createAccount(formData));
 
+        console.log(response);
+
         if (response?.payload?.success) {
           const email = formData.email;
           const password = formData.password;
